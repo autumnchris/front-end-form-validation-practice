@@ -1,5 +1,9 @@
 # Front-End Form Validation Practice
 
+A practice form that validates various commonly used form fields on the front-end with vanilla JavaScript and NPM packages.
+
+Inspired by the [Forms assignment](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/forms) as part of the curriculum for the [JavaScript course](https://www.theodinproject.com/courses/javascript) on [The Odin Project](https://www.theodinproject.com).
+
 ---
 
 ## Built With

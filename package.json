@@ -1,7 +1,7 @@
 {
   "name": "front-end-form-validation-practice",
   "version": "1.0.0",
-  "description": "",
+  "description": "A practice form that validates various commonly used form fields on the front-end with vanilla JavaScript and NPM packages.",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
