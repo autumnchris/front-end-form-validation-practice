@@ -1,5 +1,5 @@
 {
-  "name": "front-end-form-practice",
+  "name": "front-end-form-validation-practice",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/autumnchris/front-end-form-practice.git"
+    "url": "git+https://github.com/autumnchris/front-end-form-validation-practice.git"
   },
   "author": "autumnchris",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/autumnchris/front-end-form-practice/issues"
+    "url": "https://github.com/autumnchris/front-end-form-validation-practice/issues"
   },
-  "homepage": "https://github.com/autumnchris/front-end-form-practice#readme",
+  "homepage": "https://autumnchris.github.io/front-end-form-validation-practice",
   "dependencies": {
     "country-list": "^2.2.0",
     "email-validator": "^2.0.4",

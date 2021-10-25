@@ -1,4 +1,4 @@
-# Front-End Form Practice
+# Front-End Form Validation Practice
 
 ---
 
@@ -13,6 +13,10 @@
 * [country-list](https://github.com/fannarsh/country-list)
 * [Normalize.css](https://necolas.github.io/normalize.css)
 * [Font Awesome](https://fontawesome.com)
+
+## Demo
+
+View project demo at [https://autumnchris.github.io/front-end-form-validation-practice](https://autumnchris.github.io/front-end-form-validation-practice).
 
 ## Instructions
 
