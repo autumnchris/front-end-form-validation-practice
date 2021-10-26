@@ -1,7 +1,27 @@
+import { PracticeForm } from './practice-form';
+
 const App = (() => {
 
   function renderApp() {
-    document.getElementById('app').innerHTML = ``;
+    document.getElementById('app').innerHTML = `
+      <header>
+        <h1>Front-End Form Validation Practice</h1>
+      </header>
+      <main></main>
+      <footer>Created by <a href="https://autumnbullard-portfolio.herokuapp.com" target="_blank">Autumn Bullard</a> &copy; ${new Date().getFullYear()}</footer>`;
+
+    PracticeForm.renderForm();
+
+    document.addEventListener('submit', event => {
+      const element = event.target;
+      element.matches('.practice-form') ? PracticeForm.validateForm(event, {
+        email: document.getElementById('email').value,
+        country: document.getElementById('country').value,
+        zipCode: document.getElementById('zip-code').value,
+        password: document.getElementById('password').value,
+        confirmPassword: document.getElementById('confirm-password').value
+      }) : null;
+    });
   }
 
   return {
