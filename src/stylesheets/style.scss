@@ -4,6 +4,7 @@
 
 html {
   background: transparent;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   color: change-color($black, $lightness: 20%);
   height: 100%;
@@ -11,6 +12,7 @@ html {
   body {
     background: change-color($black, $lightness: 90%);
     min-height: 100%;
+    -ms-scroll-chaining: none;
     overscroll-behavior: none;
     padding: 0 20px;
     position: relative;
@@ -40,6 +42,7 @@ html {
     h4,
     h5,
     h6 {
+      -webkit-box-sizing: border-box;
       box-sizing: border-box;
       margin-top: 0;
     }
@@ -57,6 +60,7 @@ form,
 label,
 input,
 select {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -70,6 +74,18 @@ select {
   line-height: 1.3;
   padding: 8px;
   width: 100%;
+  &::-webkit-input-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+  &::-moz-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+  &:-ms-input-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+  &::-ms-input-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
   &::placeholder {
     color: change-color($black, $lightness: 60%);
   }
@@ -94,6 +110,7 @@ input:focus,
 select:focus,
 textarea:focus,
 [tabindex]:focus {
+  -webkit-box-shadow: 0 0 3px 3px hsla(203, 95%, 62%, 0.8);
   box-shadow: 0 0 3px 3px hsla(203, 95%, 62%, 0.8);
   outline: none;
 }
@@ -142,6 +159,8 @@ textarea:focus,
 }
 
 select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   background: transparent;
   border: 0;
@@ -166,12 +185,19 @@ h1 {
   max-width: 600px;
   padding: 15px 25px;
   .form-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     max-width: 400px;
     padding: 12px 0;
     label {
       font-size: 0.7rem;
+      -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
       order: 1;
       padding-top: 7px;
       text-transform: uppercase;
@@ -179,6 +205,7 @@ h1 {
     input:focus {
       background: change-color($purple, $lightness: 93%);
       border-bottom: 1px solid $purple;
+      -webkit-box-shadow: none;
       box-shadow: none;
     }
   }
