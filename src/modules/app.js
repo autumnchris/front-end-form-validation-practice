@@ -8,7 +8,7 @@ const App = (() => {
         <h1>Front-End Form Validation Practice</h1>
       </header>
       <main></main>
-      <footer>Created by <a href="https://autumnbullard-portfolio.herokuapp.com" target="_blank">Autumn Bullard</a> &copy; ${new Date().getFullYear()}</footer>`;
+      <footer>Created by <a href="https://autumnchris.github.io/portfolio" target="_blank">Autumn Bullard</a> &copy; ${new Date().getFullYear()}</footer>`;
 
     PracticeForm.renderForm();
 
