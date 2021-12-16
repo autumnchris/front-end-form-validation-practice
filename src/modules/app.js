@@ -12,6 +12,16 @@ const App = (() => {
 
     PracticeForm.renderForm();
 
+    document.addEventListener('click', event => {
+      const element = event.target;
+      element.matches('.practice-form .form-group input[type=checkbox]') ? PracticeForm.handleCheckbox(event) : null;
+    });
+
+    document.addEventListener('keydown', event => {
+      const element = event.target;
+      element.matches('.practice-form .form-group .checkmark') ? PracticeForm.handleCheckbox(event) : null;
+    });
+
     document.addEventListener('submit', event => {
       const element = event.target;
       element.matches('.practice-form') ? PracticeForm.validateForm(event, {

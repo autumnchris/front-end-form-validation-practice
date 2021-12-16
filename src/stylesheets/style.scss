@@ -172,6 +172,53 @@ select {
   }
 }
 
+.check-label {
+  cursor: pointer;
+  padding: 5px 5px 5px 25px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  input[type=checkbox] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+  }
+  .checkmark {
+    background: change-color($black, $lightness: 100%);
+    border: 1px solid $purple;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 16px;
+    &:after {
+      border: solid change-color($black, $lightness: 100%);
+      border-width: 0 2px 2px 0;
+      content: "";
+      display: none;
+      height: 8px;
+      left: 5px;
+      position: absolute;
+      top: 1px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      width: 4px;
+    }
+  }
+  input:checked ~ .checkmark {
+    background: $purple;
+    &:after {
+      display: block;
+    }
+  }
+}
+
 // SPECIFIC ELEMENT STYLES
 
 h1 {

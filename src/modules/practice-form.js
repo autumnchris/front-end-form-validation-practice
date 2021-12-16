@@ -3,6 +3,7 @@ import emailValidator from 'email-validator';
 import passwordValidator from 'password-validator';
 
 const PracticeForm = (() => {
+  let checkboxStatus = false;
 
   function renderForm() {
     document.querySelector('main').innerHTML = `<form class="practice-form" novalidate>
@@ -27,6 +28,12 @@ const PracticeForm = (() => {
       <div class="form-group">
         <label for="confirm-password">Confirm Password</label>
         <input type="password" name="confirmPassword" id="confirm-password" />
+      </div>
+      <div class="form-group">
+        <label class="check-label" for="show-password">Show Password
+          <input type="checkbox" name="showPassword" tabindex="-1" id="show-password" ${checkboxStatus ? 'checked' : ''} />
+          <span class="checkmark" tabindex="0" data-input-id="show-password"></span>
+        </label>
       </div>
       <div class="button-group">
         <input type="submit" class="button submit-button" value="Submit" />
@@ -97,6 +104,33 @@ const PracticeForm = (() => {
     return schema.validate(passwordInput);
   }
 
+  function handleCheckbox(event) {
+
+    if (event.keyCode === 32) {
+      event.preventDefault();
+      document.getElementById(event.target.dataset.inputId).checked = !document.getElementById(event.target.dataset.inputId).checked;
+    }
+
+    if (event.keyCode === 32 || event.type === 'click') {
+      checkboxStatus = !checkboxStatus;
+      showPassword(checkboxStatus);
+    }
+  }
+
+  function showPassword(isChecked) {
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+
+    if (isChecked) {
+      passwordInput.type = 'text';
+      confirmPasswordInput.type = 'text';
+    }
+    else {
+      passwordInput.type = 'password';
+      confirmPasswordInput.type = 'password';
+    }
+  }
+
   function renderErrorMessage(messageText) {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('message', 'error-message');
@@ -125,7 +159,8 @@ const PracticeForm = (() => {
 
   return {
     renderForm,
-    validateForm
+    validateForm,
+    handleCheckbox
   };
 })();
 
