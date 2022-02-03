@@ -1,6 +1,4 @@
 import countryList from 'country-list';
-import emailValidator from 'email-validator';
-import passwordValidator from 'password-validator';
 
 const PracticeForm = (() => {
   let checkboxStatus = false;
@@ -9,25 +7,25 @@ const PracticeForm = (() => {
     document.querySelector('main').innerHTML = `<form class="practice-form" novalidate>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" autofocus />
+        <input type="email" name="email" id="email" autofocus required />
       </div>
       <div class="form-group">
         <label for="country">Country</label>
         <div class="select-wrapper">
-          <select name="country" id="country"></select>
+          <select name="country" id="country" required></select>
         </div>
       </div>
       <div class="form-group">
         <label for="zip-code">US Zip Code</label>
-        <input type="text" name="zipCode" id="zip-code" />
+        <input type="text" name="zipCode" inputmode="numeric" id="zip-code" required />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
+        <input type="password" name="password" id="password" required />
       </div>
       <div class="form-group">
         <label for="confirm-password">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="confirm-password" />
+        <input type="password" name="confirmPassword" id="confirm-password" required />
       </div>
       <div class="form-group">
         <label class="check-label" for="show-password">Show Password
@@ -36,7 +34,7 @@ const PracticeForm = (() => {
         </label>
       </div>
       <div class="button-group">
-        <input type="submit" class="button submit-button" value="Submit" />
+        <button type="submit" class="button submit-button">Submit</button>
       </div>
     </form>`;
 
@@ -65,22 +63,22 @@ const PracticeForm = (() => {
     if (!formData.email.trim()) {
       renderErrorMessage('An email address is required to submit the form.');
     }
+    else if (document.getElementById('email').validity.typeMismatch) {
+      renderErrorMessage('The Email field must contain a valid email address.');
+    }
     else if (formData.country === 'placeholder') {
       renderErrorMessage('A country must be selected in order to submit the form.');
     }
     else if (!formData.zipCode.trim()) {
       renderErrorMessage('A US zip code is required to submit the form.');
     }
-    else if (!formData.password.trim()) {
-      renderErrorMessage('A password is required to submit the form.');
-    }
-    else if (!emailValidator.validate(formData.email)) {
-      renderErrorMessage('The Email field must contain a valid email address.');
-    }
     else if (!/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(formData.zipCode)) {
       renderErrorMessage('The Zip Code field must contain a valid US zip code.');
     }
-    else if (!validatePassword(formData.password)) {
+    else if (!formData.password.trim()) {
+      renderErrorMessage('A password is required to submit the form.');
+    }
+    else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&#^+=-><}{)(~])[A-Za-z0-9@$!%*?&#^+=-><}{)(~]{5,12}$/.test(formData.password)) {
       renderErrorMessage('Password must be 5 to 12 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one symbol.');
     }
     else if (formData.password !== formData.confirmPassword) {
@@ -89,19 +87,6 @@ const PracticeForm = (() => {
     else {
       renderSuccessMessage();
     }
-  }
-
-  function validatePassword(passwordInput) {
-    const schema = new passwordValidator();
-    schema
-      .is().min(5)
-      .is().max(12)
-      .has().uppercase()
-      .has().lowercase()
-      .has().digits()
-      .has().symbols()
-      .has().not().spaces();
-    return schema.validate(passwordInput);
   }
 
   function handleCheckbox(event) {

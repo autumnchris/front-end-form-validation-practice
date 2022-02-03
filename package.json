@@ -19,9 +19,7 @@
   "homepage": "https://autumnchris.github.io/front-end-form-validation-practice",
   "dependencies": {
     "country-list": "^2.2.0",
-    "email-validator": "^2.0.4",
-    "normalize.css": "^5.0.0",
-    "password-validator": "^5.1.1"
+    "normalize.css": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

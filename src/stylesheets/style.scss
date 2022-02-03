@@ -59,7 +59,11 @@ p,
 form,
 label,
 input,
-select {
+select,
+button,
+button:hover,
+button:active,
+button:focus {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -125,6 +129,7 @@ textarea:focus,
   border-radius: 30px;
   color: change-color($black, $lightness: 100%);
   cursor: pointer;
+  letter-spacing: 1px;
   line-height: normal;
   padding: 14px 16px;
   width: auto;
