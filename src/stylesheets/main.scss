@@ -1,0 +1,167 @@
+// STYLES FOR PAGE'S MAIN CONTENT
+
+// Button styles
+.button,
+.button:visited,
+.button:hover,
+.button:active,
+.button:focus {
+  background: $purple;
+  border: 0;
+  border-radius: 30px;
+  color: change-color($black, $lightness: 100%);
+  cursor: pointer;
+  letter-spacing: 1px;
+  line-height: normal;
+  padding: 14px 16px;
+  width: auto;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// Form styles
+input,
+select {
+  border: 0;
+  border-bottom: 1px solid change-color($black, $lightness: 20%);
+  border-radius: 0;
+  color: change-color($black, $lightness: 20%);
+  letter-spacing: 1px;
+  line-height: 1.3;
+  padding: 8px;
+  width: 100%;
+  &::-webkit-input-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+  &::-moz-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+  &:-ms-input-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+  &::-ms-input-placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+  &::placeholder {
+    color: change-color($black, $lightness: 60%);
+  }
+}
+
+// Select element styles
+.select-wrapper {
+  background: $purple;
+  color: change-color($black, $lightness: 100%);
+  position: relative;
+  &:after {
+    content: "\f0dc";
+    cursor: pointer;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
+  color: inherit;
+  cursor: pointer;
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+// Checkbox input styles
+.check-label {
+  cursor: pointer;
+  padding: 5px 5px 5px 25px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  input[type=checkbox] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+  }
+  .checkmark {
+    background: change-color($black, $lightness: 100%);
+    border: 1px solid $purple;
+    height: 18px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 18px;
+    &:after {
+      border: solid change-color($black, $lightness: 100%);
+      border-width: 0 2px 2px 0;
+      content: "";
+      display: none;
+      height: 8px;
+      left: 5px;
+      position: absolute;
+      top: 1px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      width: 4px;
+    }
+  }
+  input:checked ~ .checkmark {
+    background: $purple;
+    &:after {
+      display: block;
+    }
+  }
+}
+
+// Practice form styles
+.practice-form {
+  background: change-color($black, $lightness: 100%);
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 15px 25px;
+  .form-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    max-width: 400px;
+    padding: 12px 0;
+    label {
+      font-size: 0.7rem;
+      -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+      order: 1;
+      padding-top: 7px;
+      text-transform: uppercase;
+    }
+    input:focus {
+      background: change-color($purple, $lightness: 93%);
+      border-bottom: 1px solid $purple;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+  .submit-button,
+  .submit-button:hover,
+  .submit-button:active,
+  .submit-button:focus {
+    margin: 10px 0;
+  }
+}
