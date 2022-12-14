@@ -119,7 +119,7 @@ const PracticeForm = (() => {
   function renderErrorMessage(messageText) {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('message', 'error-message');
-    errorMessage.innerHTML = `<span class="fa fa-exclamation-circle fa-lg fa-fw"></span> ${messageText}`;
+    errorMessage.innerHTML = `<span class="fa fa-exclamation-circle fa-lg fa-fw" aria-hidden="true"></span> ${messageText}`;
   
     document.querySelector('.practice-form').appendChild(errorMessage);
   }
@@ -132,7 +132,7 @@ const PracticeForm = (() => {
   function renderSuccessMessage() {
     const successMessage = document.createElement('p');
     successMessage.classList.add('message', 'success-message');
-    successMessage.innerHTML = '<span class="fa fa-check-circle fa-lg fa-fw"></span> Form was successfully submitted!';
+    successMessage.innerHTML = '<span class="fa fa-check-circle fa-lg fa-fw" aria-hidden="true"></span> Form was successfully submitted!';
   
     document.querySelector('.practice-form').appendChild(successMessage);
   }
