@@ -1,4 +1,4 @@
-import { PracticeForm } from './Practice-Form';
+import { PracticeForm } from './PracticeForm';
 
 const App = (() => {
 
