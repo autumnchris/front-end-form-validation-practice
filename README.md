@@ -7,8 +7,10 @@ Inspired by the [Forms assignment](https://www.theodinproject.com/lessons/node-p
 ---
 
 ## Built With
+* Vanilla JS
 * JavaScript
 * [Sass](http://sass-lang.com)
+* CSS3
 * HTML5
 * [Webpack](https://webpack.js.org)
 * [Babel](https://babeljs.io)
