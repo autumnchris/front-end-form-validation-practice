@@ -12,6 +12,7 @@ Inspired by the [Forms assignment](https://www.theodinproject.com/lessons/node-p
 * [Sass](http://sass-lang.com)
 * CSS3
 * HTML5
+* [Node.js](https://nodejs.org/en)
 * [Webpack](https://webpack.js.org)
 * [Babel](https://babeljs.io)
 * [country-list](https://github.com/fannarsh/country-list)
