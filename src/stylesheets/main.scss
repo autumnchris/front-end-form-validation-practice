@@ -1,21 +1,31 @@
 // STYLES FOR PAGE'S MAIN CONTENT
 
 // Button styles
+.button-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .button,
 .button:visited,
 .button:hover,
 .button:active,
 .button:focus {
   background: $purple;
-  border: 0;
+  border: 1px solid $purple;
   border-radius: 30px;
-  color: change-color($black, $lightness: 100%);
+  color: change-color($purple, $lightness: 93%);
   cursor: pointer;
   letter-spacing: 1px;
   line-height: normal;
-  padding: 14px 16px;
+  padding: 12px 16px;
   text-decoration: none;
   width: auto;
+  &:hover {
+    background: change-color($purple, $lightness: 93%);
+    color: $purple;
+  }
 }
 
 // Form styles
@@ -126,7 +136,7 @@ select {
 }
 
 // Practice form styles
-.practice-form {
+.practice-form-wrapper {
   background: change-color($black, $lightness: 100%);
   margin: 0 auto;
   max-width: 600px;

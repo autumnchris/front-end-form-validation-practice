@@ -1,108 +1,60 @@
 import countryList from 'country-list';
+import ErrorMessage from './ErrorMessage';
+import SuccessMessage from './SuccessMessage';
 
-const PracticeForm = (() => {
-  let checkboxStatus = false;
-
-  function renderForm() {
-    document.querySelector('main').innerHTML = `<form class="practice-form" novalidate>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" autofocus required />
-      </div>
-      <div class="form-group">
-        <label for="country">Country</label>
-        <div class="select-wrapper">
-          <select name="country" id="country" required></select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="zip-code">US Zip Code</label>
-        <input type="text" name="zipCode" inputmode="numeric" id="zip-code" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required />
-      </div>
-      <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="confirm-password" required />
-      </div>
-      <div class="form-group">
-        <label class="check-label" for="show-password">Show Password
-          <input type="checkbox" name="showPassword" tabindex="-1" id="show-password" ${checkboxStatus ? 'checked' : ''} />
-          <span class="checkmark" tabindex="0" data-input-id="show-password"></span>
-        </label>
-      </div>
-      <div class="button-group">
-        <button type="submit" class="button submit-button">Submit</button>
-      </div>
-    </form>`;
-
-    renderListOfCountries();
+class PracticeForm {
+  constructor() {
+    this.errorMessage = new ErrorMessage();
+    this.successMessage = new SuccessMessage();
+    this.checkboxStatus = false;
   }
 
-  function renderListOfCountries() {
-    const options = document.querySelector('.select-wrapper select').innerHTML = countryList.getData().sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())).map((country, index) => {
-      return `<option value="${country.code.toLowerCase()}" id="country-${index + 1}">${country.name}</option>`;
-    }).join('');
-    const selectedOption = document.createElement('option');
-    selectedOption.setAttribute('value', 'placeholder');
-    selectedOption.setAttribute('id', 'placeholder');
-    selectedOption.setAttribute('disabled', 'true');
-    selectedOption.setAttribute('selected', 'true');
-    selectedOption.innerHTML = 'Select your country';
-    document.getElementById('country').innerHTML = options;
-    document.getElementById('country').insertBefore(selectedOption, document.querySelector('#country #country-1'));
-  }
-
-  function validateForm(event, formData) {
+  handleSubmit(event, formData) {
     event.preventDefault();
-    removeErrorMessage();
-    removeSuccessMessage();
+    this.errorMessage.removeErrorMessage('.practice-form-wrapper');
+    this.successMessage.removeSuccessMessage('.practice-form-wrapper');
+    formData.email = formData.email.trim();
+    formData.password = formData.password.trim();
+    formData.confirmPassword = formData.confirmPassword.trim();
 
-    if (!formData.email.trim()) {
-      renderErrorMessage('An email address is required to submit the form.');
+    if (!formData.email) {
+      this.errorMessage.renderErrorMessage('An email address is required to submit the form.', '.practice-form-wrapper');
     }
     else if (document.getElementById('email').validity.typeMismatch) {
-      renderErrorMessage('The Email field must contain a valid email address.');
+      this.errorMessage.renderErrorMessage('The Email field must contain a valid email address.', '.practice-form-wrapper');
     }
     else if (formData.country === 'placeholder') {
-      renderErrorMessage('A country must be selected in order to submit the form.');
+      this.errorMessage.renderErrorMessage('A country must be selected in order to submit the form.', '.practice-form-wrapper');
     }
-    else if (!formData.zipCode.trim()) {
-      renderErrorMessage('A US zip code is required to submit the form.');
-    }
-    else if (!/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(formData.zipCode)) {
-      renderErrorMessage('The Zip Code field must contain a valid US zip code.');
-    }
-    else if (!formData.password.trim()) {
-      renderErrorMessage('A password is required to submit the form.');
+    else if (!formData.password) {
+      this.errorMessage.renderErrorMessage('A password is required to submit the form.', '.practice-form-wrapper');
     }
     else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&#^+=-><}{)(~])[A-Za-z0-9@$!%*?&#^+=-><}{)(~]{5,12}$/.test(formData.password)) {
-      renderErrorMessage('Password must be 5 to 12 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one symbol.');
+      this.errorMessage.renderErrorMessage('Password must be 5 to 12 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one symbol.', '.practice-form-wrapper');
     }
     else if (formData.password !== formData.confirmPassword) {
-      renderErrorMessage('Password fields do not match.');
+      this.errorMessage.renderErrorMessage('Password fields do not match.', '.practice-form-wrapper');
     }
     else {
-      renderSuccessMessage();
+      this.successMessage.renderSuccessMessage('Form was successfully submitted!', '.practice-form-wrapper');
     }
   }
 
-  function handleCheckbox(event) {
+  handleCheckbox(event) {
 
-    if (event.keyCode === 32) {
+    if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       document.getElementById(event.target.dataset.inputId).checked = !document.getElementById(event.target.dataset.inputId).checked;
     }
 
-    if (event.keyCode === 32 || event.type === 'click') {
-      checkboxStatus = !checkboxStatus;
-      showPassword(checkboxStatus);
+    if (event.key === 'Enter' || event.key === ' ' || event.type === 'click') {
+      this.checkboxStatus = !this.checkboxStatus;
+      this.showPassword(this.checkboxStatus);
     }
   }
 
-  function showPassword(isChecked) {
+  // DOM methods
+  showPassword(isChecked) {
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
 
@@ -116,37 +68,57 @@ const PracticeForm = (() => {
     }
   }
 
-  function renderErrorMessage(messageText) {
-    const errorMessage = document.createElement('p');
-    errorMessage.classList.add('message', 'error-message');
-    errorMessage.innerHTML = `<span class="fa fa-exclamation-circle fa-lg fa-fw" aria-hidden="true"></span> ${messageText}`;
-  
-    document.querySelector('.practice-form').appendChild(errorMessage);
+  renderListOfCountries() {
+    const options = document.querySelector('.practice-form-wrapper .select-wrapper select').innerHTML = countryList.getData().sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())).map((country, index) => {
+      return `<option value="${country.code.toLowerCase()}" id="country-${index + 1}">${country.name}</option>`;
+    }).join('');
+    const selectedOption = document.createElement('option');
+    selectedOption.setAttribute('value', 'placeholder');
+    selectedOption.setAttribute('id', 'country-placeholder');
+    selectedOption.setAttribute('disabled', 'true');
+    selectedOption.setAttribute('selected', 'true');
+    selectedOption.innerHTML = 'Select your country';
+    document.getElementById('country').innerHTML = options;
+    document.getElementById('country').insertBefore(selectedOption, document.querySelector('#country #country-1'));
   }
 
-  function removeErrorMessage() {
-    const errorMessage = document.querySelector('.practice-form .error-message');
-    errorMessage ? document.querySelector('.practice-form').removeChild(errorMessage) : null;
+  renderPracticeForm(location) {
+    const practiceForm = document.createElement('div');
+    practiceForm.classList.add('practice-form-wrapper');
+    practiceForm.innerHTML = `
+      <form novalidate>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" autocomplete="email" autofocus required />
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <div class="select-wrapper">
+            <select name="country" id="country" autocomplete="off" required></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" autocomplete="off" required />
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" name="confirmPassword" id="confirm-password" autocomplete="off" required />
+        </div>
+        <div class="form-group">
+          <label class="check-label" for="show-password">Show Password
+            <input type="checkbox" name="showPassword" tabindex="-1" id="show-password" autocomplete="off" ${this.checkboxStatus ? 'checked' : ''} />
+            <span class="checkmark" tabindex="0" data-input-id="show-password"></span>
+          </label>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="button submit-button">Submit</button>
+        </div>
+      </form>
+    `;
+    document.querySelector(location).appendChild(practiceForm);
+    this.renderListOfCountries();
   }
+}
 
-  function renderSuccessMessage() {
-    const successMessage = document.createElement('p');
-    successMessage.classList.add('message', 'success-message');
-    successMessage.innerHTML = '<span class="fa fa-check-circle fa-lg fa-fw" aria-hidden="true"></span> Form was successfully submitted!';
-  
-    document.querySelector('.practice-form').appendChild(successMessage);
-  }
-
-  function removeSuccessMessage() {
-    const successMessage = document.querySelector('.practice-form .success-message');
-    successMessage ? document.querySelector('.practice-form').removeChild(successMessage) : null;
-  }
-
-  return {
-    renderForm,
-    validateForm,
-    handleCheckbox
-  };
-})();
-
-export { PracticeForm };
+export default PracticeForm;
