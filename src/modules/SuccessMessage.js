@@ -3,7 +3,7 @@ class SuccessMessage {
   renderSuccessMessage(message, location) {
     const successMessage = document.createElement('p');
     successMessage.classList.add('message', 'success-message');
-    successMessage.innerHTML = `<span class="fa fa-check-circle fa-lg fa-fw" aria-hidden="true"></span> ${message}`;
+    successMessage.innerHTML = `<span class="fa-solid fa-circle-check fa-lg fa-fw" aria-hidden="true"></span> ${message}`;
     document.querySelector(location).appendChild(successMessage);
   }
 
