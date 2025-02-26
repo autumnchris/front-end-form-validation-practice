@@ -89,7 +89,7 @@ class PracticeForm {
       <form novalidate>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" autocomplete="email" autofocus required />
+          <input type="email" name="email" id="email" autocomplete="email" autocapitalize="off" autofocus required />
         </div>
         <div class="form-group">
           <label for="country">Country</label>
@@ -99,11 +99,11 @@ class PracticeForm {
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" autocomplete="off" required />
+          <input type="password" name="password" id="password" autocomplete="off" autocapitalize="off" required />
         </div>
         <div class="form-group">
           <label for="confirm-password">Confirm Password</label>
-          <input type="password" name="confirmPassword" id="confirm-password" autocomplete="off" required />
+          <input type="password" name="confirmPassword" id="confirm-password" autocomplete="off" autocapitalize="off" required />
         </div>
         <div class="form-group">
           <label class="check-label" for="show-password">Show Password
