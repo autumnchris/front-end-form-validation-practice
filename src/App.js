@@ -8,7 +8,6 @@ class App {
     this.footer = new Footer();
     this.practiceForm = new PracticeForm();
     this.renderApp();
-    this.events();
   }
 
   // Event listeners
@@ -40,6 +39,7 @@ class App {
     this.renderMain('#app');
     this.footer.renderFooter('#app');
     this.practiceForm.renderPracticeForm('main');
+    this.events();
   }
 
   renderMain(location) {
